@@ -23,6 +23,7 @@
 									<input type="text" ng-model="todo.text"
 										class="form-control input" id="" placeholder="Text" required
 										autofocus>
+										<input type="text" ng-model="todo.priority" id="" placeholder="Priority">
 									<button type="button" ng-click="add(todo)"
 										class="btn btn-primary pull-right">Add</button>
 								</div>
@@ -68,9 +69,12 @@
 
 		$scope.add = function(todo)
 		{
+			//var dateStrToSend = $scope.date.getUTCFullYear() + '-' + ($scope.date.getUTCMonth() + 1) +  '-' + $scope.date.getUTCDate();
+			
 			var dataObj = {
 				text : todo.text,
-				isDone : "YES"
+				isDone : "YES",
+			    priority : 1
 			};
 
 			$http.post("http://localhost:8080/TodoApp/todo",dataObj).success(
@@ -106,25 +110,3 @@
 		</script>
 </body>
 </html>
-
-<!-- 	
-<html>
-Controller
-<script>
-var sampleApp = angular.module('App', []);
-sampleApp.config(['$routeProvider',function($routeProvider) {
-$routeProvider.when('/todo', {
-templateUrl:'todo.html',
-controller:'todoController'
-}).otherwise({
-redirectTo:'/todo'
-}
-);
-
-}]);
-
-sampleApp.controller('todoController', ['', function($scope){
-	$scope.message = "todoController";
-}])
-</script>
-</html> -->

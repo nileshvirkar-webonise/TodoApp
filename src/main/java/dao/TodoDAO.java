@@ -2,7 +2,7 @@ package dao;
 
 import java.util.List;
 
-import Model.Todo;
+import model.Todo;
 
 public interface TodoDAO {
 
@@ -11,4 +11,5 @@ public interface TodoDAO {
 	public List<Todo> listTodos();
 	public void removeTodo(Todo todo);
 	public void updateTodo(int id, boolean isDone);
+	
 }

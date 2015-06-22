@@ -1,8 +1,8 @@
-package Services;
+package services;
 
 import java.util.List;
 
-import Model.Todo;
+import model.Todo;
 
 public interface TodoServices {
 

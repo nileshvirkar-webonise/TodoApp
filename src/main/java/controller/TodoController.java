@@ -1,6 +1,8 @@
-package Controller;
+package controller;
 
 import java.util.List;
+
+import model.Todo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import Model.Todo;
-import Services.TodoServices;
+import services.TodoServices;
 
 @Controller
 class TodoController {
@@ -29,6 +30,7 @@ class TodoController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public void createTodo(@RequestBody Todo todo) {
 		System.out.println("todo: " + todo.toString());
+		//todo.setDueDate(new Date());
 		dataServices.addTodo(todo);
 	}
 

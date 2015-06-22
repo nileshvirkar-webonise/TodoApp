@@ -8,8 +8,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-	<context:component-scan base-package="Controller" />
+	<context:component-scan base-package="controller" />
 
+	<context:property-placeholder location="classpath:config.properties" />
 
 	<mvc:annotation-driven />
 
@@ -19,10 +20,10 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/todo"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="driverClassName" value="${driverClassName}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
 	</bean>
 
 	<bean id="sessionFactory"
@@ -30,7 +31,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>Model.Todo</value>
+				<value>model.Todo</value>
 
 			</list>
 		</property>
@@ -54,7 +55,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="todoServices" class="Services.TodoServicesImpl">
+	<bean id="todoServices" class="services.TodoServicesImpl">
 		<constructor-arg>
 			<ref bean="todoDao" />
 		</constructor-arg>
@@ -66,13 +67,37 @@
 		<property name="registeredName">
 			<value>strongHibernateStringEncryptor</value>
 		</property>
-<!-- 		<property name="algorithm">
-			<value>PBEWithMD5AndTripleDES</value>
-		</property> -->
+		<!-- <property name="algorithm"> <value>PBEWithMD5AndTripleDES</value> 
+			</property> -->
 		<property name="password">
-			<value>jasypt</value>
+			<value>${jasypt_password}</value>
 		</property>
 	</bean>
 
+	<bean id="hibernateBigDecimalEncryptor"
+		class="org.jasypt.hibernate4.encryptor.HibernatePBEBigDecimalEncryptor"
+		lazy-init="false">
+		<property name="registeredName">
+			<value>strongHibernateBigDecimalEncryptor</value>
+		</property>
+		<!-- <property name="algorithm"> <value>PBEWithMD5AndTripleDES</value> 
+			</property> -->
+		<property name="password">
+			<value>${jasypt_password}</value>
+		</property>
+	</bean>
+
+	<bean id="hibernateBigIntEncryptor"
+		class="org.jasypt.hibernate4.encryptor.HibernatePBEBigIntegerEncryptor"
+		lazy-init="false">
+		<property name="registeredName">
+			<value>strongHibernateBigIntEncryptor</value>
+		</property>
+		<!-- <property name="algorithm"> <value>PBEWithMD5AndTripleDES</value> 
+			</property> -->
+		<property name="password">
+			<value>${jasypt_password}</value>
+		</property>
+	</bean>
 
 </beans>
