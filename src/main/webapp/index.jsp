@@ -22,21 +22,37 @@
 								<div class="form-group">
 									<input type="text" ng-model="todo.text"
 										class="form-control input" id="" placeholder="Text" required
-										autofocus>
-										<input type="text" ng-model="todo.priority" id="" placeholder="Priority">
+										autofocus> <input type="text" ng-model="todo.priority"
+										id="" placeholder="Priority">
 									<button type="button" ng-click="add(todo)"
 										class="btn btn-primary pull-right">Add</button>
 								</div>
 							</form>
 						</div>
-						<div class="checkbox1" ng-repeat="todo in todos">
-							<li class="list-unstyled" align="left"><label> 
-							<input type="checkbox" class="todoList" ng-click="update(todo)" ng-true-value="true" ng-false-value="false" ng-model="todo.done">
-									{{ todo.text }}
-							</label>
-								<button type="button" ng-click="delete(todo)"
-									class="close">x</button></li>
-						</div>
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Text</th>
+									<th>Priority</th>
+									<th>X</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="todo in todos">
+									<td>{{todo.id }}</td>
+									<td><label> <input
+									type="checkbox" class="todoList" ng-click="update(todo)"
+									ng-true-value="true" ng-false-value="false"
+									ng-model="todo.done"> {{ todo.text }}
+							</label></td>
+									<td><label class="label_priority"> {{ todo.priority }} </label></td>
+									<td><button type="button" ng-click="delete(todo)" class="close">x</button></td>
+								</tr>
+
+							</tbody>
+						</table>
 					</div>
 				</div>
 
@@ -52,12 +68,6 @@
 
 				$scope.master = {};
 
-		// $scope.todos = [
-		// {id : 1, text : "Write an Angular js Tutorial for Todo-List" , isDone : false },
-		// {id : 2, text : "Update jquer.in" , isDone : false },
-		// {id : 3, text : "Create a brand-new Resume" , isDone : false }
-		// ];
-
 		$scope.reload = function()
 		{
 			$http.get("http://localhost:8080/TodoApp/todo").success(
@@ -69,12 +79,10 @@
 
 		$scope.add = function(todo)
 		{
-			//var dateStrToSend = $scope.date.getUTCFullYear() + '-' + ($scope.date.getUTCMonth() + 1) +  '-' + $scope.date.getUTCDate();
-			
 			var dataObj = {
 				text : todo.text,
 				isDone : "YES",
-			    priority : 1
+				priority : todo.priority
 			};
 
 			$http.post("http://localhost:8080/TodoApp/todo",dataObj).success(
@@ -82,14 +90,10 @@
 				{
 					$scope.reload();
 				});
-
-			//$scope.todos.push(dataObj);
 		};
 
 		$scope.delete = function(todo)
 		{
-			//$scope.todos.splice($scope.todos.indexOf(todo),1);
-
 			$http.post("http://localhost:8080/TodoApp/removeTodo",todo).success(
 				function(data, status, headers, config)
 				{

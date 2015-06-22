@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Date;
 import java.util.List;
 
 import model.Todo;
@@ -30,7 +31,7 @@ class TodoController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public void createTodo(@RequestBody Todo todo) {
 		System.out.println("todo: " + todo.toString());
-		//todo.setDueDate(new Date());
+		todo.setDueDate(new Date());
 		dataServices.addTodo(todo);
 	}
 

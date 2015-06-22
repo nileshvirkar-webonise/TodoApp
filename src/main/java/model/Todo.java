@@ -47,8 +47,8 @@ public class Todo {
 	boolean isDone;
 
 	@Column(name = "priority")
-	//@Type(type = "encryptedBigInt")
-	BigInteger priority;
+	@Type(type = "encryptedInt")
+	int priority;
 
 	@Column(name = "title")
 	String title;
@@ -62,7 +62,7 @@ public class Todo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Todo(int id, String text, boolean isDone, BigInteger priority,
+	public Todo(int id, String text, boolean isDone, int priority,
 			String title, Date dueDate) {
 		super();
 		this.id = id;
@@ -97,11 +97,11 @@ public class Todo {
 		this.isDone = isDone;
 	}
 
-	public BigInteger getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
-	public void setPriority(BigInteger priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
