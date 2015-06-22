@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.app{
+	background-color: #DDEAF4;
+}
+
+.input{
+	margin-right: 7px;
+}
+
+.checkbox1{
+	font-size: 18px;
+	width: 555px;
+}
