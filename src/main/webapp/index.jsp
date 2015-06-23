@@ -22,8 +22,9 @@
 								<div class="form-group">
 									<input type="text" ng-model="todo.text"
 										class="form-control input" id="" placeholder="Text" required
-										autofocus> <input type="text" ng-model="todo.priority"
-										id="" placeholder="Priority">
+										autofocus> 
+									<input type="text" ng-model="todo.priority"
+									class="form-control input" id="" placeholder="Priority">
 									<button type="button" ng-click="add(todo)"
 										class="btn btn-primary pull-right">Add</button>
 								</div>

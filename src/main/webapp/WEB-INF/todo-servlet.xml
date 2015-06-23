@@ -32,9 +32,9 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>model.Todo</value>
-
 			</list>
 		</property>
+		<property name="packagesToScan" value="model" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
